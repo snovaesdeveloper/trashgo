@@ -1,0 +1,18 @@
+<!--<p-menubar [model]="items">-->
+<!--    <ng-template pTemplate="start">-->
+<!--        <div style="display: flex; flex-direction: row;">-->
+<!--            <a href="/" style="cursor: pointer;">-->
+<!--                <img src="assets/images/logo.png" height="50" class="mr-2">-->
+<!--            </a>-->
+<!--            <h6 style="margin-left: 10px;">Área:-->
+<!--                <p-dropdown (onChange)="mudarArea($event)" optionLabel="label" optionValue="value" appendTo="body" [options]="[{label: 'Cooperativa', value: Authority.COOPERATIVA}, {label: 'Clínica', value: Authority.CLINICA}, {label: 'Consultor', value: Authority.CONSULTOR}, {label: 'Médico', value: Authority.MEDICO}]" [ngModel]="usuarioService.area"></p-dropdown>-->
+<!--            </h6>-->
+<!--        </div>-->
+<!--    </ng-template>-->
+<!--</p-menubar>-->
+
+<app-menu></app-menu>
+
+<p-toast [baseZIndex]="99999"></p-toast>
+
+<p-progressSpinner *ngIf="loadingService.count"></p-progressSpinner>

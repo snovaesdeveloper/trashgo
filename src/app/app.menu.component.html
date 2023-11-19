@@ -1,0 +1,14 @@
+<div class="menu-wrapper" [ngClass]="{'layout-sidebar-active': appMain.sidebarActive}"
+     (click)="appMain.onSidebarClick($event)" (mouseover)="appMain.onSidebarMouseOver($event)" (mouseleave)="appMain.onSidebarMouseLeave($event)">
+    <div class="sidebar-logo" style="margin: 1rem;">
+        <img src="assets/images/logo.png" style="width: 100%; height: 100%; object-fit: contain;">
+    </div>
+    <div style="color: #071251; text-align: center;">
+        <h4>{{usuarioService?.usuario?.nome}} ({{usuarioService?.usuario?.perfil}})</h4>
+    </div>
+    <div class="layout-menu-container">
+        <ul class="layout-menu">
+            <li app-menuitem *ngFor="let item of items; let i = index;" [active]="item.expanded" [hidden]="!item.visible" [item]="item" [index]="i" [root]="true"></li>
+        </ul>
+    </div>
+</div>

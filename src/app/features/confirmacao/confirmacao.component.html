@@ -1,0 +1,17 @@
+<div [innerHTML]="content"></div>
+
+<div *ngIf="config.data.returnValue" class="p-fluid">
+
+    <div class="p-field" [formGroup]="form">
+        <label>Motivo:</label>
+        <input autocomplete="new-password" formControlName="motivo" pInputText>
+        <form-control-erros-message [field]="form.get('motivo')"></form-control-erros-message>
+    </div>
+
+</div>
+
+<hr>
+
+<button (click)="cancelar()" class="p-button-text p-button-danger" icon="pi pi-times" label="Não" pButton pRipple></button>
+<button (click)="confirmar()" class="p-button-text p-button-success" icon="pi pi-check" label="Sim" pButton pRipple></button>
+

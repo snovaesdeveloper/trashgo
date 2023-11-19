@@ -1,0 +1,27 @@
+<div class="p-grid p-fluid" style="padding: 10px;" [formGroup]="form">
+
+    <div class="p-col-12 p-md-12" style="padding-top: 0">
+
+        <div class="p-field">
+            <label>Perfil</label>
+            <p-selectButton [disabled]="false" formControlName="perfil" [options]="[{label: 'Cliente', value: PerfilPessoa.CLIENTE}, {label: 'Cooperativa', value: PerfilPessoa.COOPERATIVA}, {label: 'Administrador', value: PerfilPessoa.ADMINISTRADOR}]" optionLabel="label" optionValue="value"></p-selectButton>
+            <form-control-erros-message [field]="form.get('perfil')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field">
+            <label>Nome</label>
+            <input autocomplete="new-password" formControlName="nome" pInputText>
+            <form-control-erros-message [field]="form.get('nome')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field">
+            <button pButton class="p-button-success p-button-outlined p-col-12" label="Cadastrar" (click)="salvar()"></button>
+        </div>
+
+        <div class="p-field">
+            <button pButton class="p-button-danger p-button-outlined p-col-12" label="Cancelar" (click)="cancelar()"></button>
+        </div>
+
+    </div>
+
+</div>

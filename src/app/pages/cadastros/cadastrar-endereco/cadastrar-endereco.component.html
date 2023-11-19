@@ -1,0 +1,70 @@
+<div class="p-grid p-fluid" style="padding: 10px;" [formGroup]="form">
+
+    <div class="p-col-12 p-md-12 p-grid" style="padding-top: 0">
+
+        <div class="p-field p-col-6">
+            <label>CEP</label>
+            <input mask="00000-000" (change)="buscaCEP()" autocomplete="new-password" formControlName="cep" pInputText>
+            <form-control-erros-message [field]="form.get('cep')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Estado</label>
+            <input autocomplete="new-password" formControlName="uf" pInputText>
+            <form-control-erros-message [field]="form.get('uf')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Cidade</label>
+            <input autocomplete="new-password" formControlName="cidade" pInputText>
+            <form-control-erros-message [field]="form.get('cidade')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Bairro</label>
+            <input autocomplete="new-password" formControlName="bairro" pInputText>
+            <form-control-erros-message [field]="form.get('bairro')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Logradouro</label>
+            <input autocomplete="new-password" formControlName="logradouro" pInputText>
+            <form-control-erros-message [field]="form.get('logradouro')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Número</label>
+            <input autocomplete="new-password" formControlName="numero" pInputText>
+            <form-control-erros-message [field]="form.get('numero')"></form-control-erros-message>
+        </div>
+
+
+        <div class="p-field p-col-6">
+            <label>Complemento</label>
+            <input autocomplete="new-password" formControlName="complemento" pInputText>
+            <form-control-erros-message [field]="form.get('complemento')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Latitude</label>
+            <input pInputText currencyMask formControlName="latitude" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 7 }" />
+            <form-control-erros-message [field]="form.get('latitude')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <label>Longitude</label>
+            <input pInputText currencyMask formControlName="longitude" [options]="{ prefix: '', thousands: '.', decimal: ',', precision: 7 }" />
+            <form-control-erros-message [field]="form.get('longitude')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field p-col-6">
+            <button pButton class="p-button-danger p-button-outlined p-col-12" label="Cancelar" (click)="cancelar()"></button>
+        </div>
+
+        <div class="p-field p-col-6">
+            <button pButton class="p-button-success p-button-outlined p-col-12" label="Salvar" (click)="salvar()"></button>
+        </div>
+
+    </div>
+
+</div>

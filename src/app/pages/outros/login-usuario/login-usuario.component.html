@@ -1,0 +1,56 @@
+<div class="login-page" style="margin-top: 10vh;" [formGroup]="form">
+
+    <div class="p-grid login-card">
+
+        <div class="card p-col-4 p-offset-4 p-align-center">
+
+            <div style="text-align: center;">
+
+                <img src="../../../../assets/images/logo.png" class="login-logo" style="width: 82%; border-radius: 10px;">
+
+            </div>
+
+            <br>
+
+            <div class="p-grid p-jc-center login-field">
+
+                <div class="p-col-10">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
+                            <i class="fa fa-at"></i>
+                        </span>
+                        <input type="text" (keyup.enter)="logar()" autocomplete="anystring" formControlName="username" pInputText placeholder="Login">
+                    </div>
+                    <form-control-erros-message [field]="form.get('username')"></form-control-erros-message>
+                </div>
+
+            </div>
+
+            <div class="p-grid p-jc-center login-field">
+
+                <div class="p-col-10">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
+                            <i class="fa fa-key"></i>
+                        </span>
+                        <input type="password" (keyup.enter)="logar()" autocomplete="anystring" formControlName="password" pInputText placeholder="Senha">
+                    </div>
+                    <form-control-erros-message [field]="form.get('password')"></form-control-erros-message>
+                </div>
+
+            </div>
+
+            <div class="p-grid p-jc-center login-field">
+
+                <div class="p-col-10">
+                    <button class="login-button p-button-primary" (click)="logar()" pButton label="Logar"></button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>

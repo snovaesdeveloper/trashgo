@@ -1,0 +1,21 @@
+<div *ngIf="field.invalid && (field.dirty || field.touched)"
+     class="alert alert-danger">
+    <div *ngIf="field.errors?.required">
+        Campo Obrigatório.
+    </div>
+    <div *ngIf="field.errors?.invalid">
+        Valor inválido.
+    </div>
+    <div *ngIf="field.errors?.minlength">
+        Tamanho mínimo não atingido.
+    </div>
+    <div *ngIf="field.errors?.maxlength">
+        Tamanho máximo ultrapassado.
+    </div>
+    <div *ngIf="field.errors?.alreadyPresent">
+        Já presente em outro registro no banco de dados.
+    </div>
+    <div *ngIf="field.errors?.cotaAtingida">
+        Cota máxima atingida, não é possível ativar mais um registro.
+    </div>
+</div>

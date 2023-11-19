@@ -1,0 +1,35 @@
+<div class="p-grid p-fluid" style="padding: 10px;" [formGroup]="form">
+
+    <div class="p-col-12 p-md-6" style="padding-top: 0">
+
+        <div class="p-field">
+            <label>Status</label>
+            <p-selectButton [options]="[{label: 'Pendente', value: StatusColeta.PENDENTE}, {label: 'Atendida', value: StatusColeta.ATENDIDA}, {label: 'Atrasada', value: StatusColeta.ATRASADA}]" [allowEmpty]="false" formControlName="status"></p-selectButton>
+            <form-control-erros-message [field]="form.get('status')"></form-control-erros-message>
+        </div>
+
+        <div class="p-field">
+            <label>Data</label>
+            <input pInputText mask="00/00/0000" placeholder="__/__/____" formControlName="data" />
+            <form-control-erros-message [field]="form.get('data')"></form-control-erros-message>
+        </div>
+
+        <div style="height: 200px; width: 100% !important;" leaflet [leafletOptions]="options" [leafletLayers]="layers"></div>
+
+    </div>
+
+    <div class="p-col-12 p-md-6" style="padding-top: 0">
+
+        <app-generic-table [pageSize]="5" [showCheckboxSelection]="true" [itemsMenu]="[]" [showRowOptions]="false" [enableRowExpansion]="false" [colunas]="columns" [dados]="dados" [selections]="selecaoAtual"></app-generic-table>
+
+        <div class="p-field">
+            <button pButton class="p-button-success p-button-outlined p-col-12" label="Cadastrar" (click)="salvar()"></button>
+        </div>
+
+        <div class="p-field">
+            <button pButton class="p-button-danger p-button-outlined p-col-12" label="Cancelar" (click)="cancelar()"></button>
+        </div>
+
+    </div>
+
+</div>

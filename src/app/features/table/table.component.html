@@ -1,0 +1,121 @@
+<p-table #table (onLazyLoad)="load($event)" (selectionChange)="mudarSelecao($event)" [(selection)]="selections" [autoLayout]="true" [lazy]="true" [loading]="loading" [paginator]="true" [resizableColumns]="false" [rows]="pageSize" [rowsPerPageOptions]="[5, 10, 20, 100, 500, 1000, 2000]" [totalRecords]="totalRecords" [value]="dados" dataKey="id" [sortMode]="sortMode" [sortField]="sortField" [sortOrder]="sortOrder" [multiSortMeta]="multipleSortField" styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped" editMode="row">
+    <ng-template pTemplate="header">
+        <tr>
+            <th *ngIf="showCheckboxSelection" style="width: 3rem; "><p-tableHeaderCheckbox></p-tableHeaderCheckbox></th>
+            <th *ngIf="enableRowExpansion" style="width: 3rem; "></th>
+            <th *ngFor="let col of columnsActive; let i = index;" [pSortableColumnDisabled]="!col.sort" [pSortableColumn]="col.sortField || col.filterField">
+                <div style="display: flex; flex-direction: row; align-items: center;">
+                    <p-sortIcon *ngIf="col.sort" [field]="col.sortField || col.filterField" style="pointer-events: auto !important;"></p-sortIcon>
+                    {{col.title}}
+                    <p-columnFilter *ngIf="col.filter && col.filterType == 'contains'" [field]="col.filterField || col.name" matchMode="contains" display="menu" style="pointer-events: auto !important;" [showOperator]="false" [showMatchModes]="false" [showAddButton]="false" [showApplyButton]="false" [showClearButton]="false">
+                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                            <input [ngModel]="value"
+                                   class="p-inputtext"
+                                   pInputText
+                                   placeholder="{{col.title}}"
+                                   mask="{{col.mask}}"
+                                   #filterInput
+                                   type="text">
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1rem;">
+                                <button class="p-button-outlined" style="width: auto;" pButton label="Limpar" (click)="filter(null)"></button>
+                                <button style="width: auto;" pButton label="Aplicar" (click)="filter(col.mask ? removeMask(filterInput.value, col.mask) : filterInput.value)"></button>
+                            </div>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="col.filter && col.filterType == 'equals' && col.filterInput == 'input'" [field]="col.filterField || col.name" matchMode="equals" display="menu" style="pointer-events: auto !important;" [showOperator]="false" [showMatchModes]="false" [showAddButton]="false" [showApplyButton]="false" [showClearButton]="false">
+                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                            <input [ngModel]="value"
+                                   class="p-inputtext"
+                                   pInputText
+                                   placeholder="{{col.title}}"
+                                   mask="{{col.mask}}"
+                                   #filterInput
+                                   type="text">
+                            <div style="display: flex; flex-direction: row; justify-content: space-between; margin-top: 1rem;">
+                                <button class="p-button-outlined" style="width: auto;" pButton label="Limpar" (click)="filter(null)"></button>
+                                <button style="width: auto;" pButton label="Aplicar" (click)="filter(col.mask ? removeMask(filterInput.value, col.mask) : filterInput.value)"></button>
+                            </div>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="col.filter && col.filterType == 'equals' && col.filterInput != 'input'" [field]="col.filterField || col.name" [matchMode]="col.filterType" [showAddButton]="false" [showClearButton]="false" [showMatchModes]="false" [showOperator]="false" display="menu" style="pointer-events: auto !important;">
+                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                            <p-dropdown (onChange)="filter($event.value)" [filter]="true" filterBy="label" [ngModel]="value" [options]="col.filterOptions" [showClear]="true" placeholder="Todos">
+                                <ng-template let-option pTemplate="item">
+                                    <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                    </p-columnFilter>
+                    <p-columnFilter *ngIf="col.filter && col.filterType == 'in'" [field]="col.filterField || col.name" [matchMode]="col.filterType" [showAddButton]="false" [showClearButton]="false" [showMatchModes]="false" [showOperator]="false" display="menu" style="pointer-events: auto !important;">
+                        <ng-template let-filter="filterCallback" let-value pTemplate="filter">
+                            <p-multiSelect (onChange)="filter($event.value)" [filter]="true" filterBy="label" [ngModel]="value" [options]="col.filterOptions" placeholder="Todos">
+                                <ng-template let-option pTemplate="item">
+                                    <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                </ng-template>
+                            </p-multiSelect>
+                        </ng-template>
+                    </p-columnFilter>
+                </div>
+            </th>
+            <th *ngIf="showRowOptions" style="width: 3rem; "></th>
+            <th style="width: 3rem;" *ngIf="showEditRow"></th>
+        </tr>
+    </ng-template>
+    <ng-template let-expanded="expanded" let-editing="editing" let-ri="rowIndex" let-row pTemplate="body">
+        <tr [pEditableRow]="row" [formGroup]="form">
+            <td *ngIf="showCheckboxSelection">
+                <p-tableCheckbox [value]="row"></p-tableCheckbox>
+            </td>
+            <td *ngIf="enableRowExpansion" style="text-align: center;">
+                <button [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"
+                        [pRowToggler]="row" class="p-button-text p-button-rounded p-button-plain"
+                        pButton
+                        pRipple
+                        type="button" style="width: 100%; padding: 0 !important;"></button>
+            </td>
+            <td *ngFor="let col of columnsActive; let i = index;" class="{{editing ? 'current-row-editing' : ''}}">
+                <p-cellEditor>
+                    <ng-template pTemplate="input">
+                        <input currencyMask [options]="{ prefix: 'R$ ', suffix: '', thousands: '.', decimal: ',' }" *ngIf="col.controlType == ControlType.CURRENCY" formControlName="{{col.filterField}}" style="width: 100%;" pInputText type="text">
+                        <input mask="{{col.controlMask || ''}}" *ngIf="col.controlType == ControlType.TEXT || col.controlType == ControlType.DATE" formControlName="{{col.filterField}}" style="width: 100%;" pInputText type="text">
+                        <p-dropdown placeholder="{{col.title}}" *ngIf="col.controlType == ControlType.DROPDOWN" [options]="col.controlOptions" optionLabel="label" optionValue="value" appendTo="body" [filter]="true" formControlName="{{col.filterField}}"></p-dropdown>
+                        <p-dropdown placeholder="{{col.title}}" *ngIf="col.controlType == ControlType.DROPDOWN_WITH_VALUE" [options]="col.controlOptions" optionLabel="label" dataKey="value" appendTo="body" [filter]="true" formControlName="{{col.filterField}}"></p-dropdown>
+                        <textarea pInputTextarea *ngIf="col.controlType == ControlType.TEXTAREA" formControlName="{{col.filterField}}"></textarea>
+                        <p-selectButton optionValue="value" *ngIf="col.controlType == ControlType.BADGE" [options]="col.controlOptions" formControlName="{{col.filterField}}">
+                            <ng-template let-item>
+                                <i class="{{item.label}}"></i>
+                            </ng-template>
+                        </p-selectButton>
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        <span [innerHTML]="col.name.includes('.') ? at(row, col.name) : row[col.name]"></span>
+                    </ng-template>
+                </p-cellEditor>
+            </td>
+            <td *ngIf="showRowOptions" style="text-align: center; padding: 0;">
+                <button (click)="tableService.selected.emit(row); menu.toggle($event);" icon="pi pi-ellipsis-v"
+                        pButton ></button>
+            </td>
+            <td style="text-align:center; padding: 0;" *ngIf="showEditRow">
+                <button *ngIf="!editing" [disabled]="alreadyEditing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(row)" class="p-button-rounded p-button-text"></button>
+                <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(row)" class="p-button-rounded p-button-text p-button-success mr-2"></button>
+                <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(row, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template *ngIf="enableRowExpansion" let-expanded pTemplate="rowexpansion">
+        <tr>
+            <td [colSpan]="columnsActive.length + 1 + (showRowOptions ? 1 : 0)">
+                <div class="p-p-3">
+                    <label *ngFor="let col of columns">
+                        <div *ngIf="col.name.includes('.') ? at(expanded, col.name) : expanded[col.name]" style="display: flex; flex-direction: row; align-items: start; margin-top: 2px;">
+                            <b>{{col.title}}:</b>&nbsp;<span [innerHTML]="col.name.includes('.') ? at(expanded, col.name) : expanded[col.name]" style="white-space: break-spaces;"></span><br>
+                        </div>
+                    </label>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-menu #menu [model]="itemsMenu" [popup]="true" appendTo="body"></p-menu>

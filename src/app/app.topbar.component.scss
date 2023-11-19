@@ -1,0 +1,64 @@
+:host ::ng-deep{
+
+    .p-progress-spinner {
+        position: absolute !important;
+        z-index: 99999 !important;
+        height: 100% !important;
+        width: 100% !important;
+        top: 0 !important;
+        left: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        background-color: rgba(0,0,0,0.3) !important;
+    }
+
+    .p-progress-spinner-svg{
+        height: 25%;
+        width: 25%;
+    }
+
+    .p-menuitem-icon, .p-menuitem-text{
+        color: #00AD4C !important;
+        font-weight: bold;
+    }
+
+}
+
+::ng-deep .p-menuitem-text {
+    white-space: nowrap;
+}
+
+::ng-deep .p-menubar .p-submenu-list {
+    width: auto;
+}
+
+::ng-deep .p-menubar-start {
+    margin-left: 50px;
+    margin-right: auto;
+}
+
+.layout-content{
+    padding: 0px !important;
+}
+
+::ng-deep .progress-spinner {
+    position: absolute !important;
+    z-index: 99999 !important;
+    height: 100% !important;
+    width: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: rgba(0,0,0,0.3) !important;
+}
+
+:host ::ng-deep .p-menubar-end{
+    display: none;
+}
+
+:host ::ng-deep p-menubarsub{
+    margin-left: auto;
+}

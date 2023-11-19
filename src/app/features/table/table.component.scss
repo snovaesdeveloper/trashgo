@@ -1,0 +1,51 @@
+td:has(.plano-acao-celula-erro){background: mediumpurple;}
+td:has(.plano-acao-celula-nao-feito){background: grey;}
+td:has(.plano-acao-celula-em-execucao){background: lightgreen;}
+td:has(.plano-acao-celula-concluido){background: green;}
+td:has(.plano-acao-celula-cancelado){background: indianred;}
+
+:host ::ng-deep{
+    td,th, .pi-filter-icon, .p-sortable-column-icon{
+        font-size: 9px;
+    }
+    .p-button-icon-only{
+        width: fit-content;
+        padding: 0.3rem;
+    }
+}
+
+:host ::ng-deep{
+    .linha-vermelha{
+        color: red;
+    }
+    .linha-verde{
+        color: green;
+    }
+}
+
+::ng-deep{
+
+    .p-column-filter-buttonbar{
+        display: none !important;
+    }
+
+    .p-inputtextarea{
+        width: 100%;
+    }
+
+    .p-dropdown{
+        width: 100%;
+    }
+
+    .current-row-editing{
+        padding: 3px !important;
+
+        p-selectButton{
+            .p-button{
+                padding: 0.3rem 0.6rem !important;
+            }
+        }
+
+    }
+
+}

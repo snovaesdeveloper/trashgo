@@ -1,0 +1,40 @@
+<div class="p-grid" style="padding: 1rem;">
+    <div class="p-col-12">
+
+        <div>
+
+            <p-toolbar styleClass="p-mb-4" *ngIf="!config.data">
+                <ng-template pTemplate="left">
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="excelService.exportExcel2(columns, dadosFiltrados, rest)"
+                            class="p-button-success p-mr-2 p-mb-2"
+                            label="Excel"></button>
+                    <button type="button" pButton pRipple icon="pi pi-file-pdf" (click)="pdfService.createPdf(columns, 'usuarios', httpDataFormatterService.usuarioFormatter(), 'usuarios')"
+                            class="p-button-warning p-mr-2 p-mb-2"
+                            label="PDF"></button>
+                    <button type="button" pButton pRipple icon="pi pi-plus-circle" (click)="openRegister()"
+                            class="p-button-primary p-mr-2 p-mb-2"
+                            label="Cadastrar"></button>
+<!--                    <button label="Excluir Selecionados" class="p-button-danger p-mr-2 p-mb-2" [disabled]="!tableService.selecaoAtual.length" pButton (click)="excluirSelecionados()"></button>-->
+                </ng-template>
+            </p-toolbar>
+
+            <div class="p-grid p-col-12">
+
+                <div class="p-col-12 p-md-7" style="height: 450px;" leaflet [leafletOptions]="options" [leafletLayers]="layers"></div>
+
+                <div class="p-col-12 p-md-5">
+                    <app-generic-table [pageSize]="pageSize" [showCheckboxSelection]="true" [itemsMenu]="itemsMenu" [showRowOptions]="true" [enableRowExpansion]="false" [colunas]="columns" [dados]="dados" (dadosFiltrados)="atualizarCards($event)"></app-generic-table>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <p-menu #menu [popup]="true" appendTo="body" [model]="itemsMenu"></p-menu>
+
+    <div *ngIf="loading" class="progress-spinner">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>

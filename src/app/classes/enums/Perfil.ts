@@ -1,0 +1,5 @@
+export enum Perfil{
+    CLIENTE = "CLIENTE",
+    COOPERATIVA = "COOPERATIVA",
+    ADMINISTRADOR = "ADMINISTRADOR"
+}

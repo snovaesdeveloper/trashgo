@@ -1,0 +1,5 @@
+export enum TipoLocal{
+    CONDOMINIO = "CONDOMINIO",
+    RESIDENCIA = "RESIDENCIA",
+    EMPRESA = "EMPRESA"
+}

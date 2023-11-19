@@ -1,0 +1,30 @@
+::ng-deep .form-cadastro .p-dropdown, ::ng-deep .form-cadastro .p-inputmask, ::ng-deep .form-cadastro .p-inputtext, ::ng-deep .form-cadastro .ng-valid, ::ng-deep .form-cadastro .ng-pristine, ::ng-deep .form-cadastro .p-calendar, ::ng-deep .form-cadastro .p-dialog-mask{
+    border-bottom-left-radius: 0 !important; border-top-left-radius: 0 !important;
+    width: 100% !important;
+}
+
+::ng-deep .leaflet-div-icon{
+    border: none !important;
+    background: none !important;
+}
+
+::ng-deep .p-column-filter-buttonbar{
+    display: none !important;
+}
+
+::ng-deep .progress-spinner {
+    position: absolute !important;
+    z-index: 99999 !important;
+    height: 100% !important;
+    width: 100% !important;
+    top: 0px !important;
+    left: 0px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: rgba(0,0,0,0.3) !important;
+}
+
+::ng-deep .p-datatable .p-datatable-tbody > tr.p-highlight{
+    background-color: #464df2ba !important;
+}
